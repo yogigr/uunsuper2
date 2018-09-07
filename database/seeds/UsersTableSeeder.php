@@ -15,8 +15,8 @@ class UsersTableSeeder extends Seeder
         User::insert([
         	[
                 'id' => 1,
-        		'name' => 'Admin',
-        		'email' => 'admin@admin.com',
+        		'name' => 'Mumu Mukhlas',
+        		'email' => 'mumumukhlas91@gmail.com',
         		'password' => bcrypt('admin'),
         		'role_id' => 1,
                 'phone' => '089653490941',
@@ -29,8 +29,8 @@ class UsersTableSeeder extends Seeder
         	],
         	[
                 'id' => 2,
-        		'name' => 'User',
-        		'email' => 'user@user.com',
+        		'name' => 'Yogi Gilang Ramadhan',
+        		'email' => 'yogigilang182@gmail.com',
         		'password' => bcrypt('user'),
         		'role_id' => 2,
                 'phone' => '089653490941',

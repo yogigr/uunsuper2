@@ -26,7 +26,8 @@
 				<div class="middle">
 					<p class="content text-justify mb-0">{{ $product->description }}</p>
 				</div>
-				@if(!Auth::user()->isAdmin())
+				@if(Auth::check() && Auth::user()->isAdmin())
+				@else
 				<div>
 					<form method="post" action="{{  url('cart/'.$product->slug) }}">
 						{{ csrf_field() }}

@@ -21,8 +21,14 @@ class OrderController extends Controller
     public function index()
     {
         if (Auth::user()->isAdmin()) {
-            $orders = Order::orderBy('order_status_id', 'asc')->paginate(10);
-            return view('order.index', compact('orders'));
+            if (request('query')) {
+                $orders = Order::where('code', 'like', '%'.request('query').'%')->paginate(10)
+                ->appends(request()->except('page'));
+            } else {
+                $orders = Order::orderBy('order_status_id', 'asc')->paginate(10);
+            }
+           
+            return view('admin.order.index', compact('orders'));
         }
 
         $orders = Auth::user()->orders()->orderBy('order_status_id', 'asc')->paginate(10);
@@ -56,12 +62,16 @@ class OrderController extends Controller
     	//destroy carts
     	Cart::destroy();
 
-    	return redirect()->route('order.show', ['order' => $order->code])
+    	return redirect('/order/'.$order->code)
     	->with('status', 'Pesanan berhasil dibuat');
     }
 
     public function show(Order $order)
     {
+        if (Auth::user()->isAdmin()) {
+            return view('admin.order.show', compact('order'));
+        }
+
     	return view('order.show', compact('order'));
     }
 

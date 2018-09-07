@@ -32,5 +32,10 @@ class PageController extends Controller
     {
     	return view('page.detail-product', compact('product'));
     }
+
+    public function dashboard()
+    {
+        return view('admin.dashboard');
+    }
  
 }

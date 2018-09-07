@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-    	'name', 'slug', 'description', 'price', 'category_id', 'photo'
+    	'name', 'slug', 'description', 'price', 'category_id', 'photo', 'is_in_stock'
     ];
 
     public function priceFormatted()
@@ -21,6 +21,24 @@ class Product extends Model
             return asset('images/product/null.jpg');
         } else {
             return asset('images/product/'.$this->photo);
+        }
+    }
+
+    public function getBadge()
+    {
+        if ($this->is_in_stock) {
+            return 'badge badge-success';
+        } else {
+            return 'badge badge-danger';
+        }
+    }
+
+    public function getStatus()
+    {
+        if ($this->is_in_stock) {
+            return 'Tersedia';
+        } else {
+            return 'Kosong';
         }
     }
 

@@ -18,19 +18,19 @@ class ProductController extends Controller
     public function index()
     {
     	if (request('query')) {
-    		$products = Product::where('name', 'like', '%'.request('query').'%')->paginate(10)
+    		$products = Product::where('name', 'like', '%'.request('query').'%')->paginate(1)
     		->appends(request()->except('page'));
     	} else {
     		$products = Product::orderBy('created_at', 'desc')->paginate(10);
     	}
     	
-    	return view('product.index', compact('products'));
+    	return view('admin.product.index', compact('products'));
     }
 
     public function create()
     {
     	$categories = Category::all();
-    	return view('product.create', compact('categories'));
+    	return view('admin.product.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -61,20 +61,20 @@ class ProductController extends Controller
     	$product->photo = $photo;
     	$product->save();
 
-        //tambah stock
-        Stock::create([
-            'product_id' => $product->id,
-            'total' => $request->stock
-        ]);
-
-    	return redirect()->route('product.index')
+    	return redirect('admin/product/'.$product->slug)
     	->with('status', 'Berhasil menambah produk.');
     }
 
     public function show($slug)
     {
     	$product = Product::where('slug', $slug)->firstOrFail();
-    	return view('product.show', compact('product'));	
+    	return view('admin.product.show', compact('product'));	
+    }
+
+    public function edit(Product $product)
+    {
+       $categories = Category::all();
+        return view('admin.product.edit', compact('product', 'categories'));
     }
 
     public function update(Request $request, Product $product)
@@ -106,15 +106,29 @@ class ProductController extends Controller
 		$product->slug = str_slug($product->name);
 		$product->save();
 
-    	return redirect()->route('product.index')
+    	return redirect('admin/product/'.$product->slug)
     	->with('status', 'Berhasil Memperbaharui produk');
     }
 
     public function destroy(Product $product)
     {
     	$product->delete();
-    	return redirect()->route('product.index')
+    	return redirect('admin/product')
     	->with('status', 'Berhasil hapus produk');
+    }
+
+    public function setKosong(Product $product)
+    {
+        $product->is_in_stock = false;
+        $product->save();
+        return back()->with('status', 'Berhasil set status produk menjadi kosong');
+    }
+
+    public function setTersedia(Product $product)
+    {
+        $product->is_in_stock = true;
+        $product->save();
+        return back()->with('status', 'Berhasil set status produk menjadi tersedia');
     }
 
     private function upload_photo($request, $slug)

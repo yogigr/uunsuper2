@@ -36,11 +36,20 @@ Route::get('konfirmasi-pembelian', 'CartController@konfirmasiPembelian')->name('
 //order
 Route::resource('order', 'OrderController')->except(['create', 'update', 'edit']);
 Route::patch('order/{order}/delivered', 'OrderController@delivered');
-Route::patch('order/{order}/process', 'OrderController@process');
-Route::patch('order/{order}/send', 'OrderController@send');
 
 //payment confirmation
 Route::get('payment-confirmation/{order}', 'PaymentConfirmationController@create');
 Route::post('payment-confirmation/{order}', 'PaymentConfirmationController@store');
 
-Route::resource('product', 'ProductController');
+//admin
+Route::prefix('admin')->group(function(){
+	Route::get('dashboard', 'PageController@dashboard')->name('admin.dashboard');
+
+	Route::resource('order', 'OrderController')->except(['create', 'update', 'edit', 'store']);
+	Route::patch('order/{order}/process', 'OrderController@process');
+	Route::patch('order/{order}/send', 'OrderController@send');
+
+	Route::resource('product', 'ProductController');
+	Route::patch('product/{product}/set-kosong', 'ProductController@setKosong');
+	Route::patch('product/{product}/set-tersedia', 'ProductController@setTersedia');
+});

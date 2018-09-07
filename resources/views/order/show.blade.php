@@ -21,27 +21,14 @@
 					<p>Status: <span class="{{ $order->getBadge() }}">{{ $order->order_status->name }}</span></p>
 				</div>
 				<div class="col-12 col-sm-4">
-					@if(Auth::user()->isAdmin())
-						@if($order->order_status_id == 1)
-							<button class="btn btn-warning btn-sm"
-							data-toggle="collapse" data-target="#paymentConfirmation" aria-expanded="false">Lihat Konfirmasi Pembayaran</button>
-						@elseif($order->order_status_id == 2)
-							<form method="post" action="{{ url('order/'.$order->code.'/send') }}" onsubmit="return confirm('Yakin pesanan akan dikirim?')">
-								{{ csrf_field() }}
-								{{ method_field('patch') }}
-								<button class="btn btn-success btn-sm ">Kirim Pesanan</button>
-							</form>
-						@endif
-					@else
-						@if($order->order_status_id == 1)
-							<a href="{{ url('payment-confirmation/'.$order->code) }}" class="btn btn-warning btn-sm">Konfirmasi Pembayaran</a>
-						@elseif($order->order_status_id == 3)
-							<form method="post" action="{{ url('order/'.$order->code.'/delivered') }}" onsubmit="return confirm('Yakin?')">
-								{{ csrf_field() }}
-								{{ method_field('patch') }}
-								<button class="btn btn-success btn-sm ">Konfirmasi Telah diterima</button>
-							</form>
-						@endif
+					@if($order->order_status_id == 1)
+						<a href="{{ url('payment-confirmation/'.$order->code) }}" class="btn btn-warning btn-sm">Konfirmasi Pembayaran</a>
+					@elseif($order->order_status_id == 3)
+						<form method="post" action="{{ url('order/'.$order->code.'/delivered') }}" onsubmit="return confirm('Yakin?')">
+							{{ csrf_field() }}
+							{{ method_field('patch') }}
+							<button class="btn btn-success btn-sm ">Konfirmasi Telah diterima</button>
+						</form>
 					@endif
 				</div>
 			</div>

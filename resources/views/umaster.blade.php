@@ -42,11 +42,11 @@
                                   </a>
                                   <div class="dropdown-menu" style="display: none;">
                                     @if(Auth::user()->isAdmin())
-                                    <a class="dropdown-item" href="{{ url('product') }}">
-                                        <i class="fa fa-shopping-bag"></i>
-                                        Daftar Produk
+                                    <a class="dropdown-item" href="{{ url('admin/dashboard') }}">
+                                        <i class="fa fa-dashboard"></i>
+                                        Admin Dashboard
                                     </a>
-                                    @endif
+                                    @else
                                     <a class="dropdown-item" href="{{ url('order') }}">
                                         <i class="fa fa-shopping-cart"></i>
                                         Daftar Pesanan
@@ -58,6 +58,7 @@
                                     <form id="logoutForm" method="post" action="{{ url('logout') }}">
                                         {{ csrf_field() }}
                                     </form>
+                                    @endif
                                   </div>
                                 </li>
                             @else
