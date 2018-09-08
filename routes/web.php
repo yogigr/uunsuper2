@@ -41,6 +41,11 @@ Route::patch('order/{order}/delivered', 'OrderController@delivered');
 Route::get('payment-confirmation/{order}', 'PaymentConfirmationController@create');
 Route::post('payment-confirmation/{order}', 'PaymentConfirmationController@store');
 
+//profile
+Route::get('profile', 'ProfileController@index');
+Route::patch('profile/update', 'ProfileController@update');
+Route::patch('profile/change-password', 'ProfileController@changePassword');
+
 //admin
 Route::prefix('admin')->group(function(){
 	Route::get('dashboard', 'PageController@dashboard')->name('admin.dashboard');

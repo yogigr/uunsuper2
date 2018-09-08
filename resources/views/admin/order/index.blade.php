@@ -54,7 +54,7 @@
 							</tr>
 						@endforeach
 					@else
-						<tr><td colspan="6">
+						<tr><td colspan="7">
 							@if(request('query'))
 								Order tidak ditemukan
 							@else

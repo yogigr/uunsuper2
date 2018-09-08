@@ -25,7 +25,7 @@
             <nav class="navbar navbar-expand-lg  navbar-light">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <img src="{{ asset('themes/shop/img/logo.png') }}">
+                        <strong>{{ config('app.name') }}</strong>
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="lnr lnr-menu"></span>
@@ -35,6 +35,17 @@
                         <ul class="navbar-nav">
                             <li><a href="{{ url('/') }}">Home</a></li>
                             <li><a href="{{ url('shop') }}">Shop</a></li>
+                            @if(Auth::check() && Auth::user()->isAdmin())
+                            @else
+                             <li>
+                                <a href="{{ url('cart') }}">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <span class="badge badge-danger rounded-circle">
+                                        {{ \Cart::count() }}
+                                    </span>
+                                </a>
+                            </li>
+                            @endif
                             @if(Auth::check())
                                 <li class="dropdown">
                                   <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -47,9 +58,13 @@
                                         Admin Dashboard
                                     </a>
                                     @else
+                                    <a class="dropdown-item" href="{{ url('profile') }}">
+                                        <i class="fa fa-user"></i>
+                                        Profile
+                                    </a>
                                     <a class="dropdown-item" href="{{ url('order') }}">
                                         <i class="fa fa-shopping-cart"></i>
-                                        Daftar Pesanan
+                                        Order History
                                     </a>
                                     <a class="dropdown-item" href="#" onclick="getElementById('logoutForm').submit()">
                                         <i class="fa fa-sign-out"></i>
@@ -63,18 +78,6 @@
                                 </li>
                             @else
                                 <li><a href="{{ url('login') }}"><i class="fa fa-sign-in"></i> Login</a></li>
-                            @endif
-                            
-                            @if(Auth::check() && Auth::user()->isAdmin())
-                            @else
-                             <li>
-                                <a href="{{ url('cart') }}">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <span class="badge badge-danger rounded-circle">
-                                        {{ \Cart::count() }}
-                                    </span>
-                                </a>
-                            </li>
                             @endif
                         </ul>
                     </div>                        
