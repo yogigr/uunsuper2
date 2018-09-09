@@ -36,6 +36,7 @@ Route::get('konfirmasi-pembelian', 'CartController@konfirmasiPembelian')->name('
 //order
 Route::resource('order', 'OrderController')->except(['create', 'update', 'edit']);
 Route::patch('order/{order}/delivered', 'OrderController@delivered');
+Route::get('order/{order}/invoice', 'OrderController@invoice');
 
 //payment confirmation
 Route::get('payment-confirmation/{order}', 'PaymentConfirmationController@create');
@@ -57,4 +58,11 @@ Route::prefix('admin')->group(function(){
 	Route::resource('product', 'ProductController');
 	Route::patch('product/{product}/set-kosong', 'ProductController@setKosong');
 	Route::patch('product/{product}/set-tersedia', 'ProductController@setTersedia');
+
+	Route::resource('user', 'UserController');
+
+	Route::get('web-setting', 'WebSettingController@index');
+	Route::patch('web-setting', 'WebSettingController@update');
+
+	Route::resource('category', 'CategoryController');
 });

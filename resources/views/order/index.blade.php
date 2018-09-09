@@ -12,6 +12,14 @@
 <div class="row">
 	<div class="col">
 		<div class="card card-body">
+			<form method="get" action="{{ url('order') }}" class="mb-3">
+				<div class="row">
+					<div class="col-md-4">
+						<input type="text" name="query" class="form-control" value="{{ request('query') }}"
+						placeholder="Cari order">
+					</div>
+				</div>
+			</form>
 			<div class="table-responsive">
 				<table class="table table-hover table-bordered">
 					<thead class="thead-ligh">
@@ -46,7 +54,13 @@
 								</tr>
 							@endforeach
 						@else
-							<tr><td colspan="6">Belum ada Pesanan</td></tr>
+							<tr><td colspan="6">
+								@if(request('query'))
+								Order tidak ditemukan
+								@else
+								Belum ada Pesanan
+								@endif
+							</td></tr>
 						@endif
 					</tbody>
 				</table>

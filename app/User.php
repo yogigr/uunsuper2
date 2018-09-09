@@ -39,6 +39,15 @@ class User extends Authenticatable
         $this->notify(new ResetPassword($token));
     }
 
+    public function getBadge()
+    {
+        if ($this->role_id == 1) {
+            return 'badge badge-success';
+        } else {
+            return 'badge badge-info';
+        }
+    }
+
     //relation
     public function role()
     {

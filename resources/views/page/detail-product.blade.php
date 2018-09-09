@@ -20,8 +20,8 @@
 				<div class="top">
 					<h3 class="head">{{ $product->name }}</h3>
 					<div class="price d-flex align-items-center"><span class="lnr lnr-tag"></span> <span class="ml-10">{{ $product->priceStringFormatted() }}</span></div>
-					<div class="category">Category: <span>{{ $product->category->name }}</span></div>
-					<div class="available">Availibility: <span>In Stock</span></div>
+					<div class="category">Kategori: <span>{{ $product->category->name }}</span></div>
+					<div class="available">Status: <span class="{{ $product->getBadge() }}">{{ $product->getStatus() }}</span></div>
 				</div>
 				<div class="middle">
 					<p class="content text-justify mb-0">{{ $product->description }}</p>
@@ -33,12 +33,13 @@
 						{{ csrf_field() }}
 						<div class="quantity-container d-flex align-items-center mt-15">
 							<div class="form-group">
-								<label>Quantity</label>
-								<input type="number" name="quantity" value="300" class="form-control" min="300">
+								<label>Jumlah</label>
+								<input type="number" name="quantity" value="{{ $product->is_in_stock ? '300' : '0' }}" class="form-control" min="300">
 							</div>
 						</div>
 						<div class="d-flex mt-20">
-							<button type="submit" class="view-btn color-2"><span>Add to Cart</span></a>
+							<button type="submit" class="view-btn color-2"
+							{{ $product->is_in_stock ? '' : 'disabled' }}><span>Add to Cart</span></a>
 						</div>
 					</form>
 				</div>

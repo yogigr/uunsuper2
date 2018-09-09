@@ -11,6 +11,11 @@ class Company extends Model
     	'email', 'instagram', 'facebook', 'twitter', 'google', 'logo'
     ];
 
+    public function shortDesc()
+    {
+        return substr($this->description, 0, 200) . '...';
+    }
+
     public function city()
     {
     	return $this->belongsTo('App\City');

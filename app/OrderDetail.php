@@ -20,6 +20,11 @@ class OrderDetail extends Model
         return 'Rp ' . number_format($this->totalPrice(), 0, '', '.');
     }
 
+    public function productPriceStringFormatted()
+    {
+        return 'Rp ' . number_format($this->product_price, 0, '', '.');
+    }
+
     //relation
     public function order()
     {

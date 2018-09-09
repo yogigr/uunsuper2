@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>{{ config('app.name') }} - @yield('title')</title>
+  <title>{{ $company->name }} - @yield('title')</title>
   <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}">
 </head>
@@ -51,21 +51,27 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="users"></span>
-                Customers
+              <a class="nav-link
+              {{ request()->segment(1) == 'admin' && request()->segment(2) == 'category' ? 'active' : '' }}" 
+              href="{{ url('admin/category') }}">
+                <i class="fa fa-tags"></i>
+                Categories
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="bar-chart-2"></span>
-                Reports
+              <a class="nav-link
+              {{ request()->segment(1) == 'admin' && request()->segment(2) == 'user' ? 'active' : '' }}" 
+              href="{{ url('admin/user') }}">
+                <i class="fa fa-user"></i>
+                Users
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="layers"></span>
-                Integrations
+              <a class="nav-link
+              {{ request()->segment(1) == 'admin' && request()->segment(2) == 'web-setting' ? 'active' : '' }}" 
+              href="{{ url('admin/web-setting') }}">
+                <i class="fa fa-sliders"></i>
+                Pengaturan Web
               </a>
             </li>
           </ul>
