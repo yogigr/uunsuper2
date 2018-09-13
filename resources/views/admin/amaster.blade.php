@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ $company->name }} - @yield('title')</title>
   <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}">
@@ -64,6 +65,14 @@
               href="{{ url('admin/user') }}">
                 <i class="fa fa-user"></i>
                 Users
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link
+              {{ request()->segment(1) == 'admin' && request()->segment(2) == 'report' ? 'active' : '' }}" 
+              href="{{ url('admin/report') }}">
+                <i class="fa fa-print"></i>
+                Reports
               </a>
             </li>
             <li class="nav-item">

@@ -48,21 +48,18 @@ Route::patch('profile/update', 'ProfileController@update');
 Route::patch('profile/change-password', 'ProfileController@changePassword');
 
 //admin
-Route::prefix('admin')->group(function(){
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 	Route::get('dashboard', 'PageController@dashboard')->name('admin.dashboard');
-
 	Route::resource('order', 'OrderController')->except(['create', 'update', 'edit', 'store']);
 	Route::patch('order/{order}/process', 'OrderController@process');
 	Route::patch('order/{order}/send', 'OrderController@send');
-
 	Route::resource('product', 'ProductController');
 	Route::patch('product/{product}/set-kosong', 'ProductController@setKosong');
 	Route::patch('product/{product}/set-tersedia', 'ProductController@setTersedia');
-
 	Route::resource('user', 'UserController');
-
 	Route::get('web-setting', 'WebSettingController@index');
 	Route::patch('web-setting', 'WebSettingController@update');
-
 	Route::resource('category', 'CategoryController');
+	Route::get('report', 'ReportController@index');
+	Route::get('report/print', 'ReportController@print');
 });
