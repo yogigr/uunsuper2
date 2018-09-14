@@ -20,6 +20,9 @@ Route::get('shop', 'PageController@shop')->name('shop');
 Route::get('shop/category/{category}', 'PageController@category');
 Route::get('shop/{product}', 'PageController@detailProduct');
 
+Route::get('about', 'PageController@about');
+Route::get('contact', 'PageController@contact');
+
 //cart
 Route::get('/cart', 'CartController@index')->name('cart.index');
 Route::delete('cart/clear', 'CartController@clear')->name('cart.clear');

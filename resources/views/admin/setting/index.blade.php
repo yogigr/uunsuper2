@@ -1,6 +1,10 @@
 @extends('admin.amaster')
 @section('title', 'Web Setting')
 @section('content')
+<a href="{{ url('/') }}" target="_blank" class="btn btn-primary mb-3">
+	<i class="fa fa-eye"></i>
+	Lihat Halaman Depan
+</a>
 @if(session('status'))
 	<div class="alert alert-success">{{ session('status') }}</div>
 @endif
@@ -16,6 +20,14 @@
 					class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}">
 					@if($errors->has('name'))
 						<div class="invalid-feedback">{{ $errors->first('name') }}</div>
+					@endif
+				</div>
+				<div class="form-group">
+					<label>Slogan</label>
+					<input type="text" name="slogan" value="{{ $company->slogan }}"
+					class="form-control {{ $errors->has('slogan') ? 'is-invalid' : '' }}">
+					@if($errors->has('slogan'))
+						<div class="invalid-feedback">{{ $errors->first('slogan') }}</div>
 					@endif
 				</div>
 				<div class="form-group">

@@ -24,6 +24,7 @@ class WebSettingController extends Controller
 
     	$request->validate([
     		'name' => 'required|string',
+            'slogan' => 'required|string',
     		'description' => 'required|string',
     		'province_id' => 'required',
     		'city_id' => 'required',
@@ -48,6 +49,7 @@ class WebSettingController extends Controller
 
     	//update database
     	$company->name = $request->name;
+        $company->slogan = $request->slogan;
     	$company->description = $request->description;
     	$company->email = $request->email;
     	$company->address = $request->address;

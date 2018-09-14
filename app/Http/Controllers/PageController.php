@@ -10,7 +10,7 @@ class PageController extends Controller
 {
     public function index()
     {
-    	$products = Product::all();
+    	$products = Product::orderBy('created_at', 'desc')->take(6)->get();
     	return view('page.index', compact('products'));
     }
 
@@ -19,6 +19,16 @@ class PageController extends Controller
     	$categories = Category::all();
     	$products = Product::orderBy('created_at', 'desc')->paginate(12);
     	return view('page.shop', compact('products', 'categories'));
+    }
+
+    public function about()
+    {
+        return view('page.about');
+    }
+
+    public function contact()
+    {
+        return view('page.contact');
     }
 
     public function category(Category $category)

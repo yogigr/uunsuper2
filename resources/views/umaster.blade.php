@@ -33,8 +33,24 @@
 
                     <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
                         <ul class="navbar-nav">
-                            <li><a href="{{ url('/') }}">Home</a></li>
-                            <li><a href="{{ url('shop') }}">Shop</a></li>
+                            <li>
+                                <a class="{{ request()->segment(1) == '' ? 'text-secondary' : '' }}" href="{{ url('/') }}">
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->segment(1) == 'shop' ? 'text-secondary' : '' }}" href="{{ url('shop') }}">
+                                    Shop
+                                </a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->segment(1) == 'about' ? 'text-secondary' : '' }}" href="{{ url('about') }}">
+                                    Tentang Kami
+                                </a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->segment(1) == 'contact' ? 'text-secondary' : '' }}" href="{{ url('contact') }}">Kontak</a>
+                            </li>
                             @if(Auth::check() && Auth::user()->isAdmin())
                             @else
                              <li>
@@ -90,11 +106,11 @@
             <div class="row height align-items-center justify-content-center">
                 <div class="col-lg-10">
                     <div class="generic-banner-content">
-                        <h2 class="text-white text-center">The Elements Page</h2>
-                        <p class="text-white">It won’t be a bigger problem to find one video game lover in your <br> neighbor. Since the introduction of Virtual Game.</p>
+                        <h2 class="text-white text-center">{{ $company->name }}</h2>
+                        <p class="text-white">{{ $company->slogan }}</p>
                         <div class="text-center">
                             <a href="{{ url('shop') }}" class="genric-btn info circle arrow">
-                                Shopping Page
+                                Mulai Belanja
                                 <span class="lnr lnr-arrow-right"></span>
                             </a>
                         </div>
