@@ -22,7 +22,7 @@ class CompaniesTableSeeder extends Seeder
         	'province_id' => 9,
             'postal_code' => '45465',
         	'phone1' => '085224800600',
-        	'email' => 'uunsuper@gmail.com',
+        	'email' => 'uunsuper13@gmail.com',
             'logo' => 'logo.png'
         ]);
     }

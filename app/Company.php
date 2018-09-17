@@ -16,6 +16,15 @@ class Company extends Model
         return substr($this->description, 0, 200) . '...';
     }
 
+    public function getLogo()
+    {
+        if (is_null($this->logo)) {
+            return asset('images/web/logo.png');
+        } else {
+            return asset('images/web/'.$this->logo);
+        }
+    }
+
     public function city()
     {
     	return $this->belongsTo('App\City');

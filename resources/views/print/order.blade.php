@@ -1,7 +1,6 @@
 @extends('print.master')
 @section('title', 'Order Report')
 @section('content')
-<div class="card card-body">
 	<h3 class="text-center">Laporan Pesanan</h3>
 	<p class="text-center">Periode <strong>{{ request('from') }}</strong> s/d <strong>{{ request('to') }}</strong></p>
 	<div class="table-responsive">
@@ -38,7 +37,6 @@
 			</tbody>
 		</table>
 	</div>
-</div>
 @endsection
 @push('scripts')
 <script>

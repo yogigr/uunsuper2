@@ -6,8 +6,8 @@
 	<title>{{ config('app.name') }} - @yield('title')</title>
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 </head>
-<body>
-	<div class="container pt-3">
+<body style="background-color: #fff">
+	<div class="container p-5">
 		@yield('content')
 	</div>
 	<script src="{{ asset('js/app.js') }}"></script>
