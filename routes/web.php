@@ -53,6 +53,7 @@ Route::patch('profile/change-password', 'ProfileController@changePassword');
 //admin
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 	Route::get('dashboard', 'PageController@dashboard')->name('admin.dashboard');
+	Route::delete('order/clear-pending-order', 'OrderController@clearPendingOrder');
 	Route::resource('order', 'OrderController')->except(['create', 'update', 'edit', 'store']);
 	Route::patch('order/{order}/process', 'OrderController@process');
 	Route::patch('order/{order}/send', 'OrderController@send');

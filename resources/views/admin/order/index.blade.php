@@ -15,6 +15,16 @@
 					placeholder="Cari Order">
 				</form>
 			</div>
+			<div class="col-sm-8 text-right">
+				<form method="post" action="{{ url('admin/order/clear-pending-order') }}">
+					{{ csrf_field() }}
+					{{ method_field('delete') }}
+					<button type="submit" class="btn btn-danger" onclick="return confirm('yakin hapus semua pesanan pending?')">
+						<i class="fa fa-trash"></i>
+						Hapus semua Pesanan Pending
+					</button>
+				</form>
+			</div>
 		</div>
 	</div>
 	<div class="card-body">
@@ -50,6 +60,15 @@
 										<i class="fa fa-eye"></i>
 										View
 									</a>
+									@if($order->order_status_id == 1)
+										<form method="post" action="{{ url('admin/order/'.$order->code) }}" class="mt-1">
+											{{ csrf_field() }}
+											{{ method_field('delete') }}
+											<button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('yakin hapus pesanan?')">
+												<i class="fa fa-trash"></i>
+											</button>
+										</form>
+									@endif
 								</td>
 							</tr>
 						@endforeach

@@ -108,4 +108,23 @@ class OrderController extends Controller
         $company = Company::firstOrFail();
         return view('print.invoice', compact('order', 'company'));
     }
+
+    public function destroy(Order $order)
+    {
+        $order->delete();
+        return back()->with('status', 'Pesanan dihapus.');
+    }
+
+    public function clearPendingOrder()
+    {
+        $orders = Order::where('order_status_id', 1)->get();
+
+        if ($orders->count() > 0) {
+            foreach ($orders as $order) {
+                $order->delete();
+            }
+            return back()->with('status', 'Semua Pesanan pending dihapus.');
+        }
+        return back()->with('status', 'Tidak ada pesanan yang pending.');
+    }
 }
